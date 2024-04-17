@@ -14,13 +14,6 @@ const Footer: React.FC<FooterProps> = ({ footerItems }) => {
                     <div>
                         <StaticImage src='../images/logo.png' alt='logo' className="w-48" />
                     </div>
-                    <div className="mt-12 flex space-x-6 cursor-pointer">
-                        {footerItems.socialIcons.map((socialIcon, index) => (
-                            <a key={index} href={socialIcon.link}>
-                                <StaticImage src={socialIcon.src} alt={socialIcon.name} className="w-6" />
-                            </a>
-                        ))}
-                    </div>
                 </div>
                 <div className='flex space-x-48 text-[#6b7583]'>
                     {Object.entries(footerItems).map(([sectionTitle, items]: [string, { link: string, name: string }[]]) => (

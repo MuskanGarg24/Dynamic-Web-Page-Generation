@@ -44,6 +44,7 @@ const Blogs: React.FC<BlogProps> = ({ cardData, title, description }) => {
                     <Card key={card.id} title={card.title} alt={card.alt} />
                 ))}
             </div>
+            {/* fetch data from API */}
             <div className="mt-14 grid grid-cols-3 gap-10">
                 {blogs.map((blog: any) => {
                     return <Card key={blog.id} title={blog.title} alt={blog.alt} />;

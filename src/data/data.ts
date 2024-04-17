@@ -1,3 +1,5 @@
+// data for home page
+
 export const titlesData = {
   heroTitle: "Real Estate",
   heroHighlightedTitle: "Risk Intelligence",

@@ -3,12 +3,13 @@ import Hero from "../components/Hero";
 import Blogs from "../components/Blogs";
 import Faq from "../components/Faq";
 import Insights from "../components/Insights";
+import Research from "../components/Research";
 import InfoCard from "../components/InfoCard";
 import { titlesData, descriptionsData, buttonsData, benefits, features, stats } from "../data/data";
 import { faqs } from "../data/faqsData";
 import { cardData } from "../data/blogsData";
 // import { GatsbySeo } from 'gatsby-plugin-next-seo';
-import { SEOHome } from "../data/SEO/home";
+// import { SEOHome } from "../data/SEO/home";
 
 const Home: React.FC = () => {
     return (
@@ -29,7 +30,6 @@ const Home: React.FC = () => {
             <Insights
                 title={titlesData.insightsTitle}
                 description={descriptionsData.insightsDescription}
-                features={[]}
                 stats={stats}
             />
 
@@ -41,11 +41,10 @@ const Home: React.FC = () => {
                 buttonLabel={buttonsData.learnMore}
             />
 
-            <Insights
+            <Research
                 title={titlesData.researchTitle}
                 description={descriptionsData.researchDescription}
                 features={features}
-                stats={[]}
             />
 
             <InfoCard
