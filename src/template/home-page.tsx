@@ -7,11 +7,17 @@ import InfoCard from "../components/InfoCard";
 import { titlesData, descriptionsData, buttonsData, benefits, features, stats } from "../data/data";
 import { faqs } from "../data/faqsData";
 import { cardData } from "../data/blogsData";
+// import { GatsbySeo } from 'gatsby-plugin-next-seo';
+import { SEOHome } from "../data/SEO/home";
 
 const Home: React.FC = () => {
-
     return (
         <>
+            {/* <GatsbySeo
+                title={SEOHome.title}
+                description={SEOHome.description}
+            /> */}
+
             <Hero
                 title={titlesData.heroTitle}
                 highlightedTitle={titlesData.heroHighlightedTitle}
@@ -48,9 +54,9 @@ const Home: React.FC = () => {
                 label={buttonsData.requestAccess}
             />
 
-            <Faq faqs={faqs} />
+            <Faq faqs={faqs} title={titlesData.faqTitle} description="" />
 
-            <Blogs cardData={cardData} />
+            <Blogs cardData={cardData} title={titlesData.blogsTitle} description="" />
 
             <InfoCard
                 title={titlesData.referFriendTitle}

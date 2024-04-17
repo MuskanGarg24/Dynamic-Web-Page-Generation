@@ -5,6 +5,8 @@ export const titlesData = {
   insightsDescription: "2 Million+ Tracked Data Points",
   powerResearchTitle: "Power your research for Real Estate",
   researchTitle: "Introducing “research”",
+  faqTitle: "FAQs",
+  blogsTitle: "Real Estate Blogs",
   privatePreviewTitle: "research is in private preview",
   referFriendTitle: "Refer a Friend",
 };
