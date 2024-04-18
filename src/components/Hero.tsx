@@ -1,17 +1,16 @@
 import React from "react";
-import { StaticImage } from "gatsby-plugin-image";
 import Button from "./Button";
-import CheckMarkIcon from "../assets/svg/CheckMarkIcon";
+import { StaticImage } from "gatsby-plugin-image";
 
-interface Props {
+interface HeroProps {
     title: string;
     highlightedTitle: string;
     description: string;
-    listItems: string[];
     buttonLabel: string;
+    data: string[];
 }
 
-const Hero: React.FC<Props> = ({ title, highlightedTitle, description, listItems, buttonLabel }) => {
+const Hero: React.FC<HeroProps> = ({ title, highlightedTitle, description, buttonLabel, data }) => {
 
     return (
         <div className="bg-[#ffffff] flex space-x-10 px-48 pt-20">
@@ -23,12 +22,9 @@ const Hero: React.FC<Props> = ({ title, highlightedTitle, description, listItems
                 </h1>
                 <p className="mt-5 text-2xl text-[#4a4458]">{description}</p>
                 <ul className="my-9">
-                    {listItems.map((item, index) => {
+                    {data.map((item, index) => {
                         return (
-                            <div className="flex space-x-3 mt-3" key={index}>
-                                <CheckMarkIcon />
-                                <li className="text-lg">{item}</li>
-                            </div>
+                            <li className="text-lg mt-3" key={index}>{item}</li>
                         );
                     })}
                 </ul>

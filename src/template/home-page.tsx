@@ -1,66 +1,65 @@
 import React from "react";
 import Hero from "../components/Hero";
-import Blogs from "../components/Blogs";
-import Faq from "../components/Faq";
 import Insights from "../components/Insights";
 import Research from "../components/Research";
 import InfoCard from "../components/InfoCard";
-import { titlesData, descriptionsData, buttonsData, benefits, features, stats } from "../data/data";
-import { faqs } from "../data/faqsData";
-import { cardData } from "../data/blogsData";
-// import { GatsbySeo } from 'gatsby-plugin-next-seo';
-// import { SEOHome } from "../data/SEO/home";
+import Faq from "../components/Faq";
+import Blogs from "../components/Blogs";
+import { GatsbySeo } from 'gatsby-plugin-next-seo';
+import { homePageSEO } from "../data/seo";
+import { homePageData } from "../data/homePageData";
+import { blogsApiEndpoint } from "../data/apiEndpoints";
 
 const Home: React.FC = () => {
     return (
         <>
-            {/* <GatsbySeo
-                title={SEOHome.title}
-                description={SEOHome.description}
-            /> */}
+            <GatsbySeo
+                title={homePageSEO.title}
+                description={homePageSEO.description}
+            />
 
             <Hero
-                title={titlesData.heroTitle}
-                highlightedTitle={titlesData.heroHighlightedTitle}
-                description={descriptionsData.heroDescription}
-                listItems={[]}
-                buttonLabel=""
+                title={homePageData.hero1.title}
+                highlightedTitle={homePageData.hero1.highlightedTitle}
+                description={homePageData.hero1.description}
+                buttonLabel={homePageData.hero1.buttonLabel}
+                data={homePageData.hero1.data}
             />
 
             <Insights
-                title={titlesData.insightsTitle}
-                description={descriptionsData.insightsDescription}
-                stats={stats}
+                title={homePageData.insights.title}
+                description={homePageData.insights.description}
+                data={homePageData.insights.data}
             />
 
             <Hero
-                title={titlesData.powerResearchTitle}
-                highlightedTitle=""
-                description=""
-                listItems={benefits}
-                buttonLabel={buttonsData.learnMore}
+                title={homePageData.hero2.title}
+                highlightedTitle={homePageData.hero2.highlightedTitle}
+                description={homePageData.hero2.description}
+                buttonLabel={homePageData.hero2.buttonLabel}
+                data={homePageData.hero2.data}
             />
 
             <Research
-                title={titlesData.researchTitle}
-                description={descriptionsData.researchDescription}
-                features={features}
+                title={homePageData.research.title}
+                description={homePageData.research.description}
+                data={homePageData.research.data}
             />
 
             <InfoCard
-                title={titlesData.privatePreviewTitle}
-                description={descriptionsData.privatePreviewDescription}
-                label={buttonsData.requestAccess}
+                title={homePageData.infoCard1.title}
+                description={homePageData.infoCard1.description}
+                buttonLabel={homePageData.infoCard1.buttonLabel}
             />
 
-            <Faq faqs={faqs} title={titlesData.faqTitle} description="" />
+            <Faq title={homePageData.faq.title} description={homePageData.faq.description} data={homePageData.faq.data} />
 
-            <Blogs cardData={cardData} title={titlesData.blogsTitle} description="" />
+            <Blogs title={homePageData.blogs.title} description={homePageData.blogs.description} data={homePageData.blogs.data} blogsApiEndpoint={blogsApiEndpoint} />
 
             <InfoCard
-                title={titlesData.referFriendTitle}
-                description={descriptionsData.referFriendDescription}
-                label={buttonsData.referNow}
+                title={homePageData.infoCard2.title}
+                description={homePageData.infoCard2.description}
+                buttonLabel={homePageData.infoCard2.buttonLabel}
             />
         </>
     );

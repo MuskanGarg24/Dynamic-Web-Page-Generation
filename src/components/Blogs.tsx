@@ -1,35 +1,32 @@
 import React, { useState, useEffect } from "react";
 import Heading from "./Heading";
-import Card from "./Card";
-// import axios from 'axios';
+import { StaticImage } from 'gatsby-plugin-image';
 
-interface BlogProps {
-    cardData: CardData[];
-    title: string;
-    description: string;
-}
-
-interface CardData {
+interface BlogData {
     id: number;
     alt: string;
     title: string;
 }
 
-const Blogs: React.FC<BlogProps> = ({ cardData, title, description }) => {
-    const [blogs, setBlogs] = useState<CardData[]>([]);
+interface ApiEndPoint {
+    GET_URL: string;
+}
 
-    const fetchBlogs = async () => {
-        // const response = axios.get("https://6af246c6-21a2-4d70-9a54-5f2a7b760ed6.mock.pstmn.io/getBlogs");
-        // const data = response.data;
-        await fetch(
-            "https://6af246c6-21a2-4d70-9a54-5f2a7b760ed6.mock.pstmn.io/getBlogs"
-        )
-            .then((response) => {
-                return response.json();
-            })
-            .then((data) => {
-                setBlogs(data.blogs);
-            }).catch((error) => console.log(error));
+interface BlogProps {
+    title: string;
+    description: string;
+    data: any;
+    blogsApiEndpoint: ApiEndPoint;
+}
+
+const Blogs: React.FC<BlogProps> = ({ title, description, data, blogsApiEndpoint }) => {
+    const [blogs, setBlogs] = useState<BlogData[]>(data);
+
+    const fetchBlogs = () => {
+        fetch(blogsApiEndpoint.GET_URL)
+            .then((response) => response.json())
+            .then((data) => setBlogs([...data.blogs, ...blogs]))
+            .catch((error) => console.log(error));
     };
 
     useEffect(() => {
@@ -40,15 +37,16 @@ const Blogs: React.FC<BlogProps> = ({ cardData, title, description }) => {
         <div className="px-48 pt-28">
             <Heading title={title} description={description} />
             <div className="mt-14 grid grid-cols-3 gap-10">
-                {cardData.map((card) => (
-                    <Card key={card.id} title={card.title} alt={card.alt} />
+                {blogs.map((item) => (
+                    <div key={item.id} className="rounded-xl shadow-lg">
+                        <div>
+                            <StaticImage src="../images/blog-image.jpg" alt={item.alt} className="rounded-t-xl" />
+                        </div>
+                        <div className="p-5">
+                            <p className="font-semibold cursor-pointer">{item.title}</p>
+                        </div>
+                    </div>
                 ))}
-            </div>
-            {/* fetch data from API */}
-            <div className="mt-14 grid grid-cols-3 gap-10">
-                {blogs.map((blog: any) => {
-                    return <Card key={blog.id} title={blog.title} alt={blog.alt} />;
-                })}
             </div>
         </div>
     );

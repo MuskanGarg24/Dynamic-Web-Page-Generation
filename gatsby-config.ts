@@ -11,7 +11,7 @@ const config: GatsbyConfig = {
     "gatsby-plugin-image",
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
-    // 'gatsby-plugin-next-seo',
+    "gatsby-plugin-next-seo",
     {
       resolve: "gatsby-source-filesystem",
       options: {
