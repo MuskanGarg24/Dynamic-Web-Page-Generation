@@ -57,6 +57,8 @@ interface HomePageData {
   infoCard2: InfoCardData;
 }
 
+// convert this to yaml file and then import it to the component
+
 export const homePageData: HomePageData = {
   hero1: {
     title: "Real Estate",

@@ -1,9 +1,13 @@
 import { GatsbyConfig } from "gatsby";
+import { siteMeta } from "./src/data/seo";
+
+const siteTitle = siteMeta.siteMetadata.title;
+const siteUrl = siteMeta.siteMetadata.siteUrl;
 
 const config: GatsbyConfig = {
   siteMetadata: {
-    title: `reunion-site`,
-    siteUrl: `https://www.yourdomain.tld`,
+    title: siteTitle,
+    siteUrl: siteUrl,
   },
   graphqlTypegen: true,
   plugins: [
@@ -13,6 +17,50 @@ const config: GatsbyConfig = {
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
     "gatsby-plugin-layout",
+    {
+      resolve: "gatsby-plugin-sitemap",
+      options: {
+        query: `
+          {
+            site {
+              buildTime
+            }
+            allSitePage {
+              nodes{ 
+                path
+              }
+            }
+          }
+        `,
+        resolveSiteUrl: () => siteUrl,
+        resolvePages: ({
+          allSitePage: { nodes: allPages },
+          site: { buildTime },
+        }: {
+          allSitePage: { nodes: { path: string }[] };
+          site: { buildTime: string };
+        }) => {
+          return allPages.map((page: { path: string }) => {
+            return {
+              ...page,
+              modifiedTime: buildTime,
+            };
+          });
+        },
+        serialize: ({
+          path,
+          modifiedTime,
+        }: {
+          path: string;
+          modifiedTime: string;
+        }) => {
+          return {
+            url: path,
+            lastmod: modifiedTime,
+          };
+        },
+      },
+    },
     {
       resolve: "gatsby-source-filesystem",
       options: {

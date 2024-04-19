@@ -10,6 +10,10 @@ import { homePageSEO } from "../data/seo";
 import { homePageData } from "../data/homePageData";
 import { blogsApiEndpoint } from "../data/apiEndpoints";
 
+// yaml file -> defining what are different component to be called, order of the components and props to that component
+
+// script -> which will print this homepage using the yaml file and nunjucks
+
 const Home: React.FC = () => {
     return (
         <>
@@ -26,12 +30,6 @@ const Home: React.FC = () => {
                 data={homePageData.hero1.data}
             />
 
-            <Insights
-                title={homePageData.insights.title}
-                description={homePageData.insights.description}
-                data={homePageData.insights.data}
-            />
-
             <Hero
                 title={homePageData.hero2.title}
                 highlightedTitle={homePageData.hero2.highlightedTitle}
@@ -39,6 +37,14 @@ const Home: React.FC = () => {
                 buttonLabel={homePageData.hero2.buttonLabel}
                 data={homePageData.hero2.data}
             />
+
+            <Insights
+                title={homePageData.insights.title}
+                description={homePageData.insights.description}
+                data={homePageData.insights.data}
+            />
+
+
 
             <Research
                 title={homePageData.research.title}
