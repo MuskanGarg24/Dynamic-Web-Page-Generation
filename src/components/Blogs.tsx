@@ -37,8 +37,8 @@ const Blogs: React.FC<BlogProps> = ({ title, description, data, blogsApiEndpoint
         <div className="px-48 pt-28">
             <Heading title={title} description={description} />
             <div className="mt-14 grid grid-cols-3 gap-10">
-                {blogs.map((item) => (
-                    <div key={item.id} className="rounded-xl shadow-lg">
+                {blogs.map((item, index) => (
+                    <div key={index} className="rounded-xl shadow-lg">
                         <div>
                             <StaticImage src="../images/blog-image.jpg" alt={item.alt} className="rounded-t-xl" />
                         </div>

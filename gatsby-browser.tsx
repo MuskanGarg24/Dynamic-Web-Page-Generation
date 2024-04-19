@@ -1,12 +1,9 @@
 import "./src/styles/global.css";
-import * as React from "react"
-import type { GatsbyBrowser } from "gatsby"
-import Layout from "./src/components/Layout"
+import * as React from "react";
+import { HelmetProvider } from "react-helmet-async"
 
-export const wrapPageElement: GatsbyBrowser["wrapPageElement"] = ({
-    element,
-}) => {
-    return (
-        <Layout >{element}</Layout>
-    )
-}
+export const wrapRootElement = ({ element }) => (
+    <HelmetProvider>
+        {element}
+    </HelmetProvider>
+)

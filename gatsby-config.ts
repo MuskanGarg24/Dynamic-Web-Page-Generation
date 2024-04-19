@@ -7,16 +7,22 @@ const config: GatsbyConfig = {
   },
   graphqlTypegen: true,
   plugins: [
+    "gatsby-plugin-next-seo",
     "gatsby-plugin-postcss",
     "gatsby-plugin-image",
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
-    "gatsby-plugin-next-seo",
+    {
+      resolve: `gatsby-plugin-layout`,
+      options: {
+        component: require.resolve(`./src/components/Layout.tsx`),
+      },
+    },
     {
       resolve: "gatsby-source-filesystem",
       options: {
         name: "images",
-        path: "./src/images/",
+        path: "./src/images",
       },
       __key: "images",
     },
