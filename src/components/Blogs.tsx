@@ -4,8 +4,8 @@ import { StaticImage } from 'gatsby-plugin-image';
 
 interface BlogData {
     id: number;
-    alt: string;
-    title: string;
+    name: string;
+    value: string;
 }
 
 interface ApiEndPoint {
@@ -16,22 +16,22 @@ interface BlogProps {
     title: string;
     description: string;
     data: any;
-    blogsApiEndpoint: ApiEndPoint;
+    // blogsApiEndpoint: ApiEndPoint;
 }
 
-const Blogs: React.FC<BlogProps> = ({ title, description, data, blogsApiEndpoint }) => {
+const Blogs: React.FC<BlogProps> = ({ title, description, data }) => {
     const [blogs, setBlogs] = useState<BlogData[]>(data);
 
-    const fetchBlogs = () => {
-        fetch(blogsApiEndpoint.GET_URL)
-            .then((response) => response.json())
-            .then((data) => setBlogs([...data.blogs, ...blogs]))
-            .catch((error) => console.log(error));
-    };
+    // const fetchBlogs = () => {
+    //     fetch(blogsApiEndpoint.GET_URL)
+    //         .then((response) => response.json())
+    //         .then((data) => setBlogs([...data.blogs, ...blogs]))
+    //         .catch((error) => console.log(error));
+    // };
 
-    useEffect(() => {
-        fetchBlogs();
-    }, []);
+    // useEffect(() => {
+    //     fetchBlogs();
+    // }, []);
 
     return (
         <div className="px-48 pt-28">
@@ -40,10 +40,10 @@ const Blogs: React.FC<BlogProps> = ({ title, description, data, blogsApiEndpoint
                 {blogs.map((item, index) => (
                     <div key={index} className="rounded-xl shadow-lg">
                         <div>
-                            <StaticImage src="../images/blog-image.jpg" alt={item.alt} className="rounded-t-xl" />
+                            <StaticImage src="../images/blog-image.jpg" alt={item.name} className="rounded-t-xl" />
                         </div>
                         <div className="p-5">
-                            <p className="font-semibold cursor-pointer">{item.title}</p>
+                            <p className="font-semibold cursor-pointer">{item.value}</p>
                         </div>
                     </div>
                 ))}

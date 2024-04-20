@@ -17,17 +17,15 @@ const pageTemplate = fs.readFileSync("page.tsx.njk", "utf8");
 const importedComponents = new Set();
 
 routesData.forEach((route) => {
-  const { ymlPath, route: routePath, pageName } = route;
+  const { ymlPath, route: routePath, pageName, seo } = route;
   const components = yaml.load(fs.readFileSync(ymlPath, "utf8"));
-  Object.values(components).forEach((component) => {
-    if (importedComponents.has(component.componentName)) {
-      return;
-    }
+  components.forEach((component) => {
     importedComponents.add(component.componentName);
   });
   const renderedTemplate = nunjucks.renderString(pageTemplate, {
     pageName,
-    components: Object.values(components),
+    seo,
+    components,
     importedComponents: Array.from(importedComponents),
   });
   const outputFile = path.join(outputDir, `${pageName}.tsx`);

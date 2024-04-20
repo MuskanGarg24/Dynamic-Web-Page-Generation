@@ -1,10 +1,10 @@
 const path = require("path");
 
-exports.createPages = async ({ actions }) => {
+exports.createPages = async ({ actions }: any) => {
   const { createPage } = actions;
   createPage({
     path: "/",
-    component: path.resolve("src/template/home-page.tsx"),
+    component: path.resolve("template/Home.tsx"),
   });
   createPage({
     path: "/products",

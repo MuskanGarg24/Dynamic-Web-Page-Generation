@@ -4,7 +4,7 @@ import { InboxIcon } from '@heroicons/react/24/outline';
 
 interface Research {
     name: string;
-    description: string;
+    value: string;
 }
 
 interface ResearchProps {
@@ -29,7 +29,7 @@ const Research: React.FC<ResearchProps> = ({ title, description, data }) => {
                                     {item.name}
                                 </dt>
                                 <dd className="mt-1 flex flex-auto flex-col text-base leading-7 text-gray-600 text-md">
-                                    <p className="flex-auto">{item.description}</p>
+                                    <p className="flex-auto">{item.value}</p>
                                 </dd>
                             </div>
                         ))}

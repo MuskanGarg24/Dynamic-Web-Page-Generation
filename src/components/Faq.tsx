@@ -4,8 +4,8 @@ import { Disclosure } from '@headlessui/react';
 import { PlusIcon, MinusIcon } from '@heroicons/react/24/outline';
 
 export interface FaqType {
-    question: string;
-    answer: string;
+    name: string;
+    value: string;
 }
 
 interface FaqProps {
@@ -27,7 +27,7 @@ const Faq: React.FC<FaqProps> = ({ title, description, data }) => {
                                     <>
                                         <dt>
                                             <Disclosure.Button className="flex w-full items-start justify-between text-left text-gray-900">
-                                                <span className="text-base font-semibold leading-7">{faq.question}</span>
+                                                <span className="text-base font-semibold leading-7">{faq.name}</span>
                                                 <span className="ml-6 flex h-7 items-center">
                                                     {open ? (
                                                         <MinusIcon
@@ -40,7 +40,7 @@ const Faq: React.FC<FaqProps> = ({ title, description, data }) => {
                                             </Disclosure.Button>
                                         </dt>
                                         <Disclosure.Panel as="dd" className="mt-2 pr-12">
-                                            <p className="text-base leading-7 text-gray-600">{faq.answer}</p>
+                                            <p className="text-base leading-7 text-gray-600">{faq.value}</p>
                                         </Disclosure.Panel>
                                     </>
                                 )}

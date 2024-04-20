@@ -1,15 +1,57 @@
-import React from "react"
+import React from "react";
 {% for component in importedComponents %}
 import {{ component }} from "../src/components/{{ component }}";
 {% endfor %}
 import { GatsbySeo } from 'gatsby-plugin-next-seo';
 
+interface Data {
+    title: string;
+    highlightedTitle: string;
+    description: string;
+    buttonLabel: string;
+    data: any[];
+}
+
+interface SEO {
+    title: string,
+    description: string
+}
+
+const SeoData: SEO = {
+    title: "{{seo.title}}",
+    description: "{{seo.description}}"
+}
+
+{% for component in components %}
+const {{ component.dataVariableName}}Data: Data = {
+    {% for propKey, propValue in component.props %}
+    {% if propKey != 'data' %}
+    {{ propKey }}: "{{ propValue }}",
+    {% endif %}
+    {% endfor %}
+    data: [
+        {% if component.props.data %}
+            {% if component.props.data[0] is string %}
+                {% for item in component.props.data %}
+                    "{{ item }}",
+                {% endfor %}
+            {% else %}
+                {% for item in component.props.data %}
+                    { id: {{ item.id }}, name: "{{ item.name }}", value: "{{ item.value }}" },
+                {% endfor %}
+            {% endif %}
+        {% endif %}
+    ]
+};
+{% endfor %}
+
+
 const {{ pageName }}: React.FC = () => {
     return (
         <>
-            <GatsbySeo />
+        <GatsbySeo {...SeoData} />
             {% for component in components %}
-                <{{ component.componentName }} />
+            <{{ component.componentName }} {...{{ component.dataVariableName }}Data} />
             {% endfor %}
         </>
     );

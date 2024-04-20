@@ -8,7 +8,7 @@ import Blogs from "../components/Blogs";
 import { GatsbySeo } from 'gatsby-plugin-next-seo';
 import { homePageSEO } from "../data/seo";
 import { homePageData } from "../data/homePageData";
-import { blogsApiEndpoint } from "../data/apiEndpoints";
+// import { blogsApiEndpoint } from "../data/apiEndpoints";
 
 // yaml file -> defining what are different component to be called, order of the components and props to that component
 
@@ -22,6 +22,14 @@ const Home: React.FC = () => {
                 description={homePageSEO.description}
             />
 
+            <Hero
+                title={homePageData.hero1.title}
+                highlightedTitle={homePageData.hero1.highlightedTitle}
+                description={homePageData.hero1.description}
+                buttonLabel={homePageData.hero1.buttonLabel}
+                data={homePageData.hero1.data}
+            />
+            
             <Hero
                 title={homePageData.hero1.title}
                 highlightedTitle={homePageData.hero1.highlightedTitle}
@@ -58,7 +66,7 @@ const Home: React.FC = () => {
 
             <Faq title={homePageData.faq.title} description={homePageData.faq.description} data={homePageData.faq.data} />
 
-            <Blogs title={homePageData.blogs.title} description={homePageData.blogs.description} data={homePageData.blogs.data} blogsApiEndpoint={blogsApiEndpoint} />
+            {/* <Blogs title={homePageData.blogs.title} description={homePageData.blogs.description} data={homePageData.blogs.data} blogsApiEndpoint={blogsApiEndpoint} /> */}
 
             <InfoCard
                 title={homePageData.infoCard2.title}

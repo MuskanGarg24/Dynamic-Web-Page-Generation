@@ -1,3 +1,6 @@
 - ymlPath: "./src/data/yaml/home.yaml"
   route: "/"
   pageName: "Home"
+  seo:
+    title: "Home page title"
+    description: "Home page description"
