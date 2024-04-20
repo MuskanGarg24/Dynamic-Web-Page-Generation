@@ -1,0 +1,45 @@
+- componentName: "Navbar"
+  dataVariableName: "navItems"
+  props:
+    navItems:
+      - to: "/"
+        text: "Home"
+      - to: "/products"
+        text: "Products"
+      - to: "/company"
+        text: "Company"
+      - to: "/blog"
+        text: "Real Estate Blog"
+
+- componentName: "Footer"
+  dataVariableName: "footerData"
+  props:
+    products:
+      - name: "Research"
+        link: "/research"
+    company:
+      - name: "About Us"
+        link: "/about-us"
+      - name: "Contact Us"
+        link: "/contact-us"
+      - name: "Careers"
+        link: "/careers"
+    policy:
+      - name: "Terms of Service"
+        link: "/terms-of-service"
+      - name: "Privacy Policy"
+        link: "/privacy-policy"
+      - name: "Cookies Policy"
+        link: "/cookies-policy"
+    socialIcons:
+      - name: "Twitter"
+        link: "https://twitter.com/"
+      - name: "LinkedIn"
+        link: "https://www.linkedin.com/"
+      - name: "Instagram"
+        link: "https://www.instagram.com/"
+      - name: "YouTube"
+        link: "https://www.youtube.com/"
+      - name: "Facebook"
+        link: "https://www.facebook.com/"
+

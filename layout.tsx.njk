@@ -1,0 +1,27 @@
+import React, { ReactNode } from "react";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+
+interface LayoutProps {
+  children: ReactNode;
+}
+
+{% for component in components %}
+const {{ component.dataVariableName }} = {
+  {% for propKey, propValue in component.props %}
+  {{ propKey }}: {{ propValue | dump | safe }},
+  {% endfor %}
+};
+{% endfor %}
+
+const Layout: React.FC<LayoutProps> = ({ children }) => {
+  return (
+    <div className="flex flex-col h-screen justify-between">
+      <Navbar navItems={navItems.navItems} />
+      <div>{children}</div>
+      <Footer footerItems={footerData} />
+    </div>
+  );
+};
+
+export default Layout;

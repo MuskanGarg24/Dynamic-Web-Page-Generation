@@ -10,7 +10,7 @@ interface Data {
     description: string;
     buttonLabel: string;
     data: any[];
-    apiEndPoints: { [key: string]: string };
+    apiEndPoints: any;
 }
 
 interface SEO {
@@ -26,7 +26,7 @@ const SeoData: SEO = {
 {% for component in components %}
 const {{ component.dataVariableName}}Data: Data = {
     {% for propKey, propValue in component.props %}
-    {% if propKey != 'data' and propKey != 'apiEndPoints' %} // Exclude apiEndPoints here
+    {% if propKey != 'data' and propKey != 'apiEndPoints' %}
     {{ propKey }}: "{{ propValue }}",
     {% endif %}
     {% endfor %}

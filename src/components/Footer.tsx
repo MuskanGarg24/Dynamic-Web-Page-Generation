@@ -1,6 +1,17 @@
 import React from 'react';
 import { StaticImage } from 'gatsby-plugin-image';
-import { FooterData } from '../data/footerItems';
+
+interface FooterItem {
+    name: string;
+    link: string;
+}
+
+interface FooterData {
+    products: FooterItem[];
+    company: FooterItem[];
+    policy: FooterItem[];
+    socialIcons: FooterItem[];
+}
 
 interface FooterProps {
     footerItems: FooterData;
@@ -16,12 +27,12 @@ const Footer: React.FC<FooterProps> = ({ footerItems }) => {
                     </div>
                 </div>
                 <div className='flex space-x-48 text-[#6b7583]'>
-                    {Object.entries(footerItems).map(([sectionTitle, items]: [string, { link: string, name: string }[]]) => (
+                    {Object.entries(footerItems).map(([sectionTitle, items]: [string, FooterItem[]]) => (
                         sectionTitle !== "socialIcons" && (
                             <div key={sectionTitle}>
                                 <h6 className='font-semibold'>{sectionTitle.toUpperCase()}</h6>
                                 <ul>
-                                    {items.map((item: { link: string, name: string }, index: number) => (
+                                    {items.map((item: FooterItem, index: number) => (
                                         <li key={index} className='mt-4'>
                                             <a href={item.link}>{item.name}</a>
                                         </li>
