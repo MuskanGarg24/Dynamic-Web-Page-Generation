@@ -16,22 +16,22 @@ interface BlogProps {
     title: string;
     description: string;
     data: any;
-    // blogsApiEndpoint: ApiEndPoint;
+    apiEndPoints: ApiEndPoint;
 }
 
-const Blogs: React.FC<BlogProps> = ({ title, description, data }) => {
+const Blogs: React.FC<BlogProps> = ({ title, description, data, apiEndPoints }) => {
     const [blogs, setBlogs] = useState<BlogData[]>(data);
 
-    // const fetchBlogs = () => {
-    //     fetch(blogsApiEndpoint.GET_URL)
-    //         .then((response) => response.json())
-    //         .then((data) => setBlogs([...data.blogs, ...blogs]))
-    //         .catch((error) => console.log(error));
-    // };
+    const fetchBlogs = () => {
+        fetch(apiEndPoints.GET_URL)
+            .then((response) => response.json())
+            .then((data) => setBlogs([...data.blogs, ...blogs]))
+            .catch((error) => console.log(error));
+    };
 
-    // useEffect(() => {
-    //     fetchBlogs();
-    // }, []);
+    useEffect(() => {
+        fetchBlogs();
+    }, []);
 
     return (
         <div className="px-48 pt-28">

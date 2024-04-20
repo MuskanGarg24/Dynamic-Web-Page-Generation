@@ -6,6 +6,7 @@
     description: "Uncover valuable real estate insights and navigate risks intelligently with our data-driven solutions, leveraging government data for informed decision-making"
     buttonLabel: "Learn More"
     data: []
+    apiEndPoints: {}
 
 - componentName: "Insights"
   dataVariableName: "insights"
@@ -24,6 +25,7 @@
       - id: 2
         name: "Legal Cases"
         value: "20,000+"
+    apiEndPoints: {}
 
 - componentName: "Hero"
   dataVariableName: "hero2"
@@ -37,6 +39,7 @@
       - "Keep track of your Real Estate portfolio"
       - "Early identification of risk"
       - "Property market intelligence"
+    apiEndPoints: {}
 
 - componentName: "Research"
   dataVariableName: "research"
@@ -58,6 +61,7 @@
       - id: 3
         name: "Analytics tools"
         value: "Leverage advanced options such as sorting, grouping for an in-depth analysis"
+    apiEndPoints: {}
 
 - componentName: "InfoCard"
   dataVariableName: "infoCard1"
@@ -67,6 +71,7 @@
     description: "You can request access to it with by filling up this form"
     buttonLabel: "Request Access"
     data: []
+    apiEndPoints: {}
 
 - componentName: "Faq"
   dataVariableName: "faq"
@@ -82,6 +87,7 @@
       - id: 1
         name: "How can I access the research product during the private preview?"
         value: "To gain access to research during the private preview, please reach out to our team through the Contact page and describe your use case. We'll provide you with the necessary information and details."
+    apiEndPoints: {}
 
 - componentName: "Blogs"
   dataVariableName: "blogs"
@@ -94,6 +100,8 @@
       - id: 0
         name: "Alt text for image 1"
         value: "Victory for Developers and Allottees: MORYA GRAND's Project Extension Granted by MahaRERA"
+    apiEndPoints: 
+      GET_URL: "https://6af246c6-21a2-4d70-9a54-5f2a7b760ed6.mock.pstmn.io/getBlogs"
 
 - componentName: "InfoCard"
   dataVariableName: "infoCard2"
@@ -103,3 +111,4 @@
     description: "Spread the word and click the button below to refer our products to a friend who might find them valuable."
     buttonLabel: "Refer Now"
     data: []
+    apiEndPoints: {}
