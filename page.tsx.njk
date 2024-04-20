@@ -1,0 +1,17 @@
+import React from "react"
+{% for component in importedComponents %}
+import {{ component }} from "../src/components/{{ component }}";
+{% endfor %}
+import { GatsbySeo } from 'gatsby-plugin-next-seo';
+
+const {{ pageName }}: React.FC = () => {
+    return (
+        <>
+            <GatsbySeo />
+            {% for component in components %}
+                <{{ component.componentName }} />
+            {% endfor %}
+        </>
+    );
+};
+export default {{ pageName }};
