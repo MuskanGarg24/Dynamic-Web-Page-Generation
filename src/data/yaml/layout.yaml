@@ -8,8 +8,8 @@
         text: "Products"
       - to: "/company"
         text: "Company"
-      - to: "/blog"
-        text: "Real Estate Blog"
+      - to: "/about"
+        text: "About Us"
 
 - componentName: "Footer"
   dataVariableName: "footerData"

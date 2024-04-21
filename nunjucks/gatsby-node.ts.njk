@@ -1,0 +1,11 @@
+const path = require("path");
+
+exports.createPages = async ({ actions }: any) => {
+    const { createPage } = actions;
+    {% for pageData in pagesData %}
+        createPage({
+            path: "{{pageData.route}}",
+            component: path.resolve("template/{{pageData.pageName}}.tsx"),
+        });
+    {% endfor %}
+};

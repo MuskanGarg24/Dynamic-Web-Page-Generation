@@ -1,5 +1,27 @@
 - ymlPath: "./src/data/yaml/home.yaml"
   pageName: "Home"
+  route: "/"
   seo:
     title: "Home page title"
     description: "Home page description"
+
+- ymlPath: "./src/data/yaml/about.yaml"
+  pageName: "About"
+  route: "/about"
+  seo:
+    title: "About page title"
+    description: "About page description"
+
+- ymlPath: "./src/data/yaml/company.yaml"
+  pageName: "Company"
+  route: "/company"
+  seo:
+    title: "Company page title"
+    description: "Company page description"
+
+- ymlPath: "./src/data/yaml/products.yaml"
+  pageName: "Products"
+  route: "/products"
+  seo:
+    title: "Products page title"
+    description: "Products page description"

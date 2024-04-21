@@ -35,99 +35,305 @@ const SeoData: SEO = {
 
 
 const hero1Data: Data = {
+    
+    
     title: "Real Estate",
+    
+    
+    
     highlightedTitle: "Risk Intelligence",
+    
+    
+    
     description: "Uncover valuable real estate insights and navigate risks intelligently with our data-driven solutions, leveraging government data for informed decision-making",
+    
+    
+    
     buttonLabel: "Learn More",
-    data: [],
-    apiEndPoints: {}
+    
+    
+    
+    
+    
+    
+    data: [
+        
+            
+                
+            
+        
+    ],
+    apiEndPoints: {
+        
+    }
 };
 
 const insightsData: Data = {
+    
+    
     title: "Unlocking Insights",
+    
+    
+    
     highlightedTitle: "",
+    
+    
+    
     description: "2 Million+ Tracked Data Points",
+    
+    
+    
     buttonLabel: "Explore Insights",
+    
+    
+    
+    
+    
+    
     data: [
-        { id: 0, name: "Projects", value: "40,000+" },
-        { id: 1, name: "Developers", value: "60,000+" },
-        { id: 2, name: "Legal Cases", value: "20,000+" },
+        
+            
+                
+                    { id: 0, name: "Projects", value: "40,000+" },
+                
+                    { id: 1, name: "Developers", value: "60,000+" },
+                
+                    { id: 2, name: "Legal Cases", value: "20,000+" },
+                
+            
+        
     ],
-    apiEndPoints: {}
+    apiEndPoints: {
+        
+    }
 };
 
 const hero2Data: Data = {
+    
+    
     title: "Power your research for Real Estate",
+    
+    
+    
     highlightedTitle: "",
+    
+    
+    
     description: "",
+    
+    
+    
     buttonLabel: "Learn More",
+    
+    
+    
+    
+    
+    
     data: [
-        "Conduct due diligence on RERA projects",
-        "Keep track of your Real Estate portfolio",
-        "Early identification of risk",
-        "Property market intelligence",
+        
+            
+                
+                    "Conduct due diligence on RERA projects",
+                
+                    "Keep track of your Real Estate portfolio",
+                
+                    "Early identification of risk",
+                
+                    "Property market intelligence",
+                
+            
+        
     ],
-    apiEndPoints: {}
+    apiEndPoints: {
+        
+    }
 };
 
 const researchData: Data = {
+    
+    
     title: "Introducing “research”",
+    
+    
+    
     highlightedTitle: "",
+    
+    
+    
     description: "Unified Risk Intelligence Platform for Real Estate",
+    
+    
+    
     buttonLabel: "",
+    
+    
+    
+    
+    
+    
     data: [
-        { id: 0, name: "Easy-to-use, powerful research engine", value: "70+ filter types to help you refine your results" },
-
-        { id: 1, name: "Project and Developer profiles", value: "Deep dive into comprehensive profiles covering construction, sales, approvals and litigation details" },
-
-        { id: 2, name: "Consumer complaints and legal cases", value: "Access case history and detailed judgements" },
-
-        { id: 3, name: "Analytics tools", value: "Leverage advanced options such as sorting, grouping for an in-depth analysis" },
+        
+            
+                
+                    { id: 0, name: "Easy-to-use, powerful research engine", value: "70+ filter types to help you refine your results" },
+                
+                    { id: 1, name: "Project and Developer profiles", value: "Deep dive into comprehensive profiles covering construction, sales, approvals and litigation details" },
+                
+                    { id: 2, name: "Consumer complaints and legal cases", value: "Access case history and detailed judgements" },
+                
+                    { id: 3, name: "Analytics tools", value: "Leverage advanced options such as sorting, grouping for an in-depth analysis" },
+                
+            
+        
     ],
-    apiEndPoints: {}
+    apiEndPoints: {
+        
+    }
 };
 
 const infoCard1Data: Data = {
+    
+    
     title: "research is in private preview",
+    
+    
+    
     highlightedTitle: "",
+    
+    
+    
     description: "You can request access to it with by filling up this form",
+    
+    
+    
     buttonLabel: "Request Access",
-    data: [],
-    apiEndPoints: {}
+    
+    
+    
+    
+    
+    
+    data: [
+        
+            
+                
+            
+        
+    ],
+    apiEndPoints: {
+        
+    }
 };
 
 const faqData: Data = {
+    
+    
     title: "FAQs",
+    
+    
+    
     highlightedTitle: "",
+    
+    
+    
     description: "",
+    
+    
+    
     buttonLabel: "",
+    
+    
+    
+    
+    
+    
     data: [
-        { id: 0, name: "What is Reunion research product?", value: "research is our flagship product, currently under private preview. It&#39;s a unified search and analytics platform designed specifically for the Real Estate Risk Intelligence, providing powerful insights and comprehensive data." },
-        { id: 1, name: "How can I access the research product during the private preview?", value: "To gain access to research during the private preview, please reach out to our team through the Contact page and describe your use case. We&#39;ll provide you with the necessary information and details." },
+        
+            
+                
+                    { id: 0, name: "What is Reunion research product?", value: "research is our flagship product, currently under private preview. It&#39;s a unified search and analytics platform designed specifically for the Real Estate Risk Intelligence, providing powerful insights and comprehensive data." },
+                
+                    { id: 1, name: "How can I access the research product during the private preview?", value: "To gain access to research during the private preview, please reach out to our team through the Contact page and describe your use case. We&#39;ll provide you with the necessary information and details." },
+                
+            
+        
     ],
-    apiEndPoints: {}
+    apiEndPoints: {
+        
+    }
 };
 
 const blogsData: Data = {
+    
+    
     title: "Real Estate Blogs",
+    
+    
+    
     highlightedTitle: "",
+    
+    
+    
     description: "",
+    
+    
+    
     buttonLabel: "",
+    
+    
+    
+    
+    
+    
     data: [
-        { id: 0, name: "Alt text for image 1", value: "Victory for Developers and Allottees: MORYA GRAND&#39;s Project Extension Granted by MahaRERA" },
+        
+            
+                
+                    { id: 0, name: "Alt text for image 1", value: "Victory for Developers and Allottees: MORYA GRAND&#39;s Project Extension Granted by MahaRERA" },
+                
+            
+        
     ],
     apiEndPoints: {
+        
         GET_URL: "https://6af246c6-21a2-4d70-9a54-5f2a7b760ed6.mock.pstmn.io/getBlogs",
+        
     }
 };
 
 const infoCard2Data: Data = {
+    
+    
     title: "Refer a Friend",
+    
+    
+    
     highlightedTitle: "",
+    
+    
+    
     description: "Spread the word and click the button below to refer our products to a friend who might find them valuable.",
+    
+    
+    
     buttonLabel: "Refer Now",
-    data: [],
-    apiEndPoints: {}
+    
+    
+    
+    
+    
+    
+    data: [
+        
+            
+                
+            
+        
+    ],
+    apiEndPoints: {
+        
+    }
 };
 
 
@@ -135,24 +341,24 @@ const infoCard2Data: Data = {
 const Home: React.FC = () => {
     return (
         <>
-            <GatsbySeo {...SeoData} />
-
+        <GatsbySeo {...SeoData} />
+            
             <Hero {...hero1Data} />
-
+            
             <Insights {...insightsData} />
-
+            
             <Hero {...hero2Data} />
-
+            
             <Research {...researchData} />
-
+            
             <InfoCard {...infoCard1Data} />
-
+            
             <Faq {...faqData} />
-
+            
             <Blogs {...blogsData} />
-
+            
             <InfoCard {...infoCard2Data} />
-
+            
         </>
     );
 };
