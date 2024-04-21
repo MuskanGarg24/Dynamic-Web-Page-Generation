@@ -7,3 +7,10 @@ const Products = () => {
 }
 
 export default Products
+
+export function getServerData() {
+    console.log("Server side rendering of products page");
+    return {
+        props: {},
+    }
+}

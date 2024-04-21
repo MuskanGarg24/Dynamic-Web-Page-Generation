@@ -5,11 +5,6 @@ interface SiteMeta {
   };
 }
 
-interface SEO {
-  title: string;
-  description: string;
-}
-
 export const siteMeta: SiteMeta = {
   siteMetadata: {
     title: "reunion-site",
@@ -17,7 +12,17 @@ export const siteMeta: SiteMeta = {
   },
 };
 
+export interface SEO {
+  title: string;
+  description: string;
+}
+
 export const homePageSEO: SEO = {
   title: "Home",
   description: "Home page.",
+};
+
+export const aboutPageSEO: SEO = {
+  title: "About",
+  description: "About page.",
 };

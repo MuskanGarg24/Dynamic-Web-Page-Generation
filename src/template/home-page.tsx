@@ -6,75 +6,66 @@ import InfoCard from "../components/InfoCard";
 import Faq from "../components/Faq";
 import Blogs from "../components/Blogs";
 import { GatsbySeo } from 'gatsby-plugin-next-seo';
-import { homePageSEO } from "../data/seo";
-import { homePageData } from "../data/homePageData";
-// import { blogsApiEndpoint } from "../data/apiEndpoints";
+import { homePageData, HomePageData } from "../data/homePageData";
+import { SEO, homePageSEO } from "../data/seo";
 
-// yaml file -> defining what are different component to be called, order of the components and props to that component
+interface ServerDataProps {
+    serverData: {
+        homePageData: HomePageData;
+        homePageSEO: SEO;
+    }
+}
 
-// script -> which will print this homepage using the yaml file and nunjucks
+const Home: React.FC<ServerDataProps> = ({ serverData }) => {
 
-const Home: React.FC = () => {
+    console.log("home page props are", serverData);
+
     return (
         <>
             <GatsbySeo
-                title={homePageSEO.title}
-                description={homePageSEO.description}
+                {...serverData.homePageSEO}
             />
 
             <Hero
-                title={homePageData.hero1.title}
-                highlightedTitle={homePageData.hero1.highlightedTitle}
-                description={homePageData.hero1.description}
-                buttonLabel={homePageData.hero1.buttonLabel}
-                data={homePageData.hero1.data}
-            />
-            
-            <Hero
-                title={homePageData.hero1.title}
-                highlightedTitle={homePageData.hero1.highlightedTitle}
-                description={homePageData.hero1.description}
-                buttonLabel={homePageData.hero1.buttonLabel}
-                data={homePageData.hero1.data}
+                {...serverData.homePageData.hero1}
             />
 
             <Insights
-                title={homePageData.insights.title}
-                description={homePageData.insights.description}
-                data={homePageData.insights.data}
+                {...serverData.homePageData.insights}
             />
 
             <Hero
-                title={homePageData.hero2.title}
-                highlightedTitle={homePageData.hero2.highlightedTitle}
-                description={homePageData.hero2.description}
-                buttonLabel={homePageData.hero2.buttonLabel}
-                data={homePageData.hero2.data}
+                {...serverData.homePageData.hero2}
             />
 
             <Research
-                title={homePageData.research.title}
-                description={homePageData.research.description}
-                data={homePageData.research.data}
+                {...serverData.homePageData.research}
             />
 
             <InfoCard
-                title={homePageData.infoCard1.title}
-                description={homePageData.infoCard1.description}
-                buttonLabel={homePageData.infoCard1.buttonLabel}
+                {...serverData.homePageData.infoCard1}
             />
 
-            <Faq title={homePageData.faq.title} description={homePageData.faq.description} data={homePageData.faq.data} />
+            <Faq {...serverData.homePageData.faq} />
 
-            {/* <Blogs title={homePageData.blogs.title} description={homePageData.blogs.description} data={homePageData.blogs.data} blogsApiEndpoint={blogsApiEndpoint} /> */}
+            <Blogs {...serverData.homePageData.blogs} />
 
             <InfoCard
-                title={homePageData.infoCard2.title}
-                description={homePageData.infoCard2.description}
-                buttonLabel={homePageData.infoCard2.buttonLabel}
+                {...serverData.homePageData.infoCard2}
             />
         </>
     );
 };
 
 export default Home;
+
+
+export function getServerData() {
+    console.log("Server side rendering of home page");
+    return {
+        props: {
+            homePageData,
+            homePageSEO,
+        }
+    }
+}
