@@ -13,7 +13,7 @@ import Faq from "../src/components/Faq";
 import Blogs from "../src/components/Blogs";
 
 import { GatsbySeo } from 'gatsby-plugin-next-seo';
-import axios from "axios";
+import useAuthentication from "../src/components/useAuthentication";
 
 interface Data {
     title: string;
@@ -429,28 +429,7 @@ interface ServerDataProps {
 
 const Home: React.FC<ServerDataProps> = ({serverData}) => {
 
-    const [loggedIn, setLoggedIn] = React.useState(false);
-
-    React.useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (token) {
-            axios.get("http://localhost:3000/verify", {
-                headers: {
-                    Authorization: token
-                }
-            })
-                .then(() => {
-                    setLoggedIn(true);
-                })
-                .catch((error) => {
-                    console.log(error);
-                })
-        } else {
-            console.log("No token found");
-        }
-    }, []);
-
-    console.log(loggedIn)
+    const loggedIn = useAuthentication();
 
     return (
         <>

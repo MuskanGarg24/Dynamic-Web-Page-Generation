@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Heading from './Heading';
 import axios from 'axios';
+import { navigate } from "gatsby"
 
 interface Data {
     title: string;
@@ -24,7 +25,7 @@ const LogIn: React.FC<Data> = ({ title, buttonLabel, apiEndPoints }) => {
                 password: password
             });
             localStorage.setItem('token', response.data.token)
-            window.location.href = "/";
+            navigate('/')
             console.log(response.data);
         } catch (error) {
             console.log(error);
