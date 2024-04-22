@@ -6,6 +6,7 @@
     description: ""
     buttonLabel: "Login"
     data: []
-    apiEndPoints: {
-      "login": "http://localhost:3000/login"
-    }
+    apiEndPoints: 
+      login: "http://localhost:3000/login"
+    isSSR: false
+    isProtected: false

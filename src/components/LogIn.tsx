@@ -34,16 +34,21 @@ const LogIn: React.FC<Data> = ({ title, buttonLabel, apiEndPoints }) => {
 
     return (
         <div>
-            <Heading title={title} description='' />
-            <div>
-                <input type="text" placeholder='username' onChange={(e) => setUsername(e.target.value)} />
+            <div className="mt-9">
+                <Heading title={title} description='' />
             </div>
-            <div>
+            <div className='flex justify-center mt-20'>
+                <input type="text" placeholder='username' onChange={(e) => setUsername(e.target.value)} className='border-2 border-gray-500 px-5 py-3 rounded-xl text-lg' />
+            </div>
+            <div className='flex justify-center mt-5'>
                 <input type="password" placeholder='password'
+                    className='border-2 border-gray-500 px-5 py-3 rounded-xl text-lg'
                     onChange={(e) => setPassword(e.target.value)}
                 />
             </div>
-            <button onClick={handleLogin}>{buttonLabel}</button>
+            <div className="my-9 flex justify-center">
+                <button className='bg-blue-500 text-white px-5 py-3 rounded-xl' onClick={handleLogin}>{buttonLabel}</button>
+            </div>
         </div>
     )
 }

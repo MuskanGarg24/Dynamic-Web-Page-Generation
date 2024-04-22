@@ -67,7 +67,9 @@ interface ServerDataProps {
 
 const {{ pageName }}: React.FC<ServerDataProps> = ({serverData}) => {
 
-    const loggedIn = useAuthentication();
+    {% if pageName !== "Login" %}
+        const loggedIn = useAuthentication();
+    {% endif %}
 
     return (
         <>
