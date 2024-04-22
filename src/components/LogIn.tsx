@@ -24,7 +24,7 @@ const LogIn: React.FC<Data> = ({ title, buttonLabel, apiEndPoints }) => {
                 password: password
             });
             localStorage.setItem('token', response.data.token)
-            window.location.href = "/about";
+            window.location.href = "/";
             console.log(response.data);
         } catch (error) {
             console.log(error);

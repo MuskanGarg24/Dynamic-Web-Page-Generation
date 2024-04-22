@@ -8,6 +8,7 @@
     data: []
     apiEndPoints: {}
     isSSR: false
+    isProtected: false
 
 - componentName: "Insights"
   dataVariableName: "insights"
@@ -28,6 +29,7 @@
         value: "20,000+"
     apiEndPoints: {}
     isSSR: false
+    isProtected: true
 
 - componentName: "Hero"
   dataVariableName: "hero2"
@@ -43,6 +45,7 @@
       - "Property market intelligence"
     apiEndPoints: {}
     isSSR: false
+    isProtected: false
 
 - componentName: "Research"
   dataVariableName: "research"
@@ -66,6 +69,7 @@
         value: "Leverage advanced options such as sorting, grouping for an in-depth analysis"
     apiEndPoints: {}
     isSSR: false
+    isProtected: true
 
 - componentName: "InfoCard"
   dataVariableName: "infoCard1"
@@ -77,6 +81,7 @@
     data: []
     apiEndPoints: {}
     isSSR: true
+    isProtected: false
 
 - componentName: "Faq"
   dataVariableName: "faq"
@@ -94,6 +99,7 @@
         value: "To gain access to research during the private preview, please reach out to our team through the Contact page and describe your use case. We'll provide you with the necessary information and details."
     apiEndPoints: {}
     isSSR: true
+    isProtected: false
 
 - componentName: "Blogs"
   dataVariableName: "blogs"
@@ -109,6 +115,7 @@
     apiEndPoints: 
       GET_URL: "https://6af246c6-21a2-4d70-9a54-5f2a7b760ed6.mock.pstmn.io/getBlogs"
     isSSR: true
+    isProtected: false
 
 - componentName: "InfoCard"
   dataVariableName: "infoCard2"
@@ -120,3 +127,4 @@
     data: []
     apiEndPoints: {}
     isSSR: true
+    isProtected: false

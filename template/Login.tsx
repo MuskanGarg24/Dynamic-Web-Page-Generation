@@ -3,8 +3,7 @@ import React from "react";
 import LogIn from "../src/components/LogIn";
 
 import { GatsbySeo } from 'gatsby-plugin-next-seo';
-
-
+import axios from "axios";
 
 interface Data {
     title: string;
@@ -14,6 +13,7 @@ interface Data {
     data: any[];
     apiEndPoints: any;
     isSSR: string;
+    isProtected: string;
 }
 
 interface SEO {
@@ -29,32 +29,32 @@ const SeoData: SEO = {
 
 const login: Data = {
     
-    
-    title: "Login to your account",
-    
-    
-    
-    highlightedTitle: "",
+        
+            title: "Login to your account",
     
     
-    
-    description: "",
-    
-    
-    
-    buttonLabel: "Login",
+        
+            highlightedTitle: "",
     
     
+        
+            description: "",
     
     
+        
+            buttonLabel: "Login",
     
+    
+        
+    
+        
     
     data: [
         
-            
-                
+        
             
         
+    
     ],
     apiEndPoints: {
         
@@ -67,7 +67,7 @@ const login: Data = {
 interface ServerDataProps {
     serverData: {
         
-        login: Data;
+    login: Data;
         
         SeoData: SEO;
     }
@@ -75,7 +75,28 @@ interface ServerDataProps {
 
 const Login: React.FC<ServerDataProps> = ({serverData}) => {
 
-    
+    const [loggedIn, setLoggedIn] = React.useState(false);
+
+    React.useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            axios.get("http://localhost:3000/verify", {
+                headers: {
+                    Authorization: token
+                }
+            })
+                .then(() => {
+                    setLoggedIn(true);
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+        } else {
+            console.log("No token found");
+        }
+    }, []);
+
+    console.log(loggedIn)
 
     return (
         <>
@@ -83,7 +104,9 @@ const Login: React.FC<ServerDataProps> = ({serverData}) => {
         
             
                 
-                    <LogIn {...login} />
+                    
+                        <LogIn {...login} />
+                    
                 
             
         

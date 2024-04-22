@@ -9,7 +9,7 @@ interface LayoutProps {
 {% for component in components %}
 const {{ component.dataVariableName }} = {
   {% for propKey, propValue in component.props %}
-  {{ propKey }}: {{ propValue | dump | safe }},
+    {{ propKey }}: {{ propValue | dump | safe }},
   {% endfor %}
 };
 {% endfor %}
@@ -17,10 +17,10 @@ const {{ component.dataVariableName }} = {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <div className="flex flex-col h-screen justify-between">
-      <Navbar navItems={navItems.navItems} />
-      <div>{children}</div>
-      <Footer footerItems={footerData} />
-    </div>
+    <Navbar navItems={navItems.navItems}/>
+    <div>{children}</div>
+    <Footer footerItems={footerData}/>
+  </div>
   );
 };
 

@@ -3,9 +3,7 @@ import React from "react";
 import {{ component }} from "../src/components/{{ component }}";
 {% endfor %}
 import { GatsbySeo } from 'gatsby-plugin-next-seo';
-{% if isProtected %}
-import axios from "axios"
-{% endif %}
+import axios from "axios";
 
 interface Data {
     title: string;
@@ -15,6 +13,7 @@ interface Data {
     data: any[];
     apiEndPoints: any;
     isSSR: string;
+    isProtected: string;
 }
 
 interface SEO {
@@ -30,22 +29,24 @@ const SeoData: SEO = {
 {% for component in components %}
 const {{ component.dataVariableName}}: Data = {
     {% for propKey, propValue in component.props %}
-    {% if propKey != 'data' and propKey != 'apiEndPoints' %}
-    {{ propKey }}: "{{ propValue }}",
+        {% if propKey != 'data' and propKey != 'apiEndPoints' %}
+            {{ propKey }}: "{{ propValue }}",
     {% endif %}
     {% endfor %}
     data: [
         {% if component.props.data %}
-            {% if component.props.data[0] is string %}
-                {% for item in component.props.data %}
+        {% if component
+            .props
+            .data[0] is string %}
+            {% for item in component.props.data %}
                     "{{ item }}",
                 {% endfor %}
-            {% else %}
-                {% for item in component.props.data %}
+        {% else %}
+            {% for item in component.props.data %}
                     { id: {{ item.id }}, name: "{{ item.name }}", value: "{{ item.value }}" },
                 {% endfor %}
-            {% endif %}
         {% endif %}
+    {% endif %}
     ],
     apiEndPoints: {
         {% for key, value in component.props.apiEndPoints %}
@@ -58,7 +59,7 @@ const {{ component.dataVariableName}}: Data = {
 interface ServerDataProps {
     serverData: {
         {% for component in components %}
-        {{component.dataVariableName}}: Data;
+    {{component.dataVariableName}}: Data;
         {% endfor %}
         SeoData: SEO;
     }
@@ -66,30 +67,28 @@ interface ServerDataProps {
 
 const {{ pageName }}: React.FC<ServerDataProps> = ({serverData}) => {
 
-    {% if isProtected %}
     const [loggedIn, setLoggedIn] = React.useState(false);
 
     React.useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
-            axios.get("{{ isProtected.verifyToken }}", {
+            axios.get("http://localhost:3000/verify", {
                 headers: {
                     Authorization: token
                 }
             })
-                .then((response) => {
-                    console.log(response);
+                .then(() => {
                     setLoggedIn(true);
                 })
                 .catch((error) => {
                     console.log(error);
-                    window.location.href = "{{ isProtected.redirectRoute }}";
-                });
+                })
         } else {
-            window.location.href = "{{ isProtected.redirectRoute }}";
+            console.log("No token found");
         }
     }, []);
-    {% endif %}
+
+    console.log(loggedIn)
 
     return (
         <>
@@ -105,13 +104,27 @@ const {{ pageName }}: React.FC<ServerDataProps> = ({serverData}) => {
                     {% endif %}
                 {% endfor %}
             </>
-        ) : null}
+        ) : (<p>You need to be logged in to view this page</p>)}
         {% else %}
             {% for component in components %}
-                {% if component.props.isSSR %}
-                    <{{ component.componentName }} {...serverData.{{component.dataVariableName}}} />
+                {% if component.props.isProtected %}
+                    {Boolean({{component.dataVariableName}}.isProtected) && loggedIn ? 
+                    ( 
+                        {% if component.props.isSSR %}
+                            <{{ component.componentName }} {...serverData.{{component.dataVariableName}}} />
+                        {% else %}
+                            <{{ component.componentName }} {...{{ component.dataVariableName }}} />
+                        {% endif %}
+                    ): 
+                    (
+                        <p className="text-center text-xl my-20"> You need to be logged in to view this section </p>
+                    )}
                 {% else %}
-                    <{{ component.componentName }} {...{{ component.dataVariableName }}} />
+                    {% if component.props.isSSR %}
+                        <{{ component.componentName }} {...serverData.{{component.dataVariableName}}} />
+                    {% else %}
+                        <{{ component.componentName }} {...{{ component.dataVariableName }}} />
+                    {% endif %}
                 {% endif %}
             {% endfor %}
         {% endif %}
