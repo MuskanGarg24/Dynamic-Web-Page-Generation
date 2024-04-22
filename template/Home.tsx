@@ -34,7 +34,7 @@ const SeoData: SEO = {
 }
 
 
-const hero1Data: Data = {
+const hero1: Data = {
     
     
     title: "Real Estate",
@@ -68,7 +68,7 @@ const hero1Data: Data = {
     }
 };
 
-const insightsData: Data = {
+const insights: Data = {
     
     
     title: "Unlocking Insights",
@@ -108,7 +108,7 @@ const insightsData: Data = {
     }
 };
 
-const hero2Data: Data = {
+const hero2: Data = {
     
     
     title: "Power your research for Real Estate",
@@ -150,7 +150,7 @@ const hero2Data: Data = {
     }
 };
 
-const researchData: Data = {
+const research: Data = {
     
     
     title: "Introducing “research”",
@@ -192,7 +192,7 @@ const researchData: Data = {
     }
 };
 
-const infoCard1Data: Data = {
+const infoCard1: Data = {
     
     
     title: "research is in private preview",
@@ -226,7 +226,7 @@ const infoCard1Data: Data = {
     }
 };
 
-const faqData: Data = {
+const faq: Data = {
     
     
     title: "FAQs",
@@ -264,7 +264,7 @@ const faqData: Data = {
     }
 };
 
-const blogsData: Data = {
+const blogs: Data = {
     
     
     title: "Real Estate Blogs",
@@ -302,7 +302,7 @@ const blogsData: Data = {
     }
 };
 
-const infoCard2Data: Data = {
+const infoCard2: Data = {
     
     
     title: "Refer a Friend",
@@ -337,29 +337,81 @@ const infoCard2Data: Data = {
 };
 
 
+interface ServerDataProps {
+    serverData: {
+        
+        hero1: Data;
+        
+        insights: Data;
+        
+        hero2: Data;
+        
+        research: Data;
+        
+        infoCard1: Data;
+        
+        faq: Data;
+        
+        blogs: Data;
+        
+        infoCard2: Data;
+        
+        SeoData: SEO;
+    }
+}
 
-const Home: React.FC = () => {
+const Home: React.FC<ServerDataProps> = ({serverData}) => {
+
+    console.log("page props are", serverData);
+
     return (
         <>
-        <GatsbySeo {...SeoData} />
+        <GatsbySeo {...serverData.SeoData} />
             
-            <Hero {...hero1Data} />
+            <Hero {...serverData.hero1} />
             
-            <Insights {...insightsData} />
+            <Insights {...serverData.insights} />
             
-            <Hero {...hero2Data} />
+            <Hero {...serverData.hero2} />
             
-            <Research {...researchData} />
+            <Research {...serverData.research} />
             
-            <InfoCard {...infoCard1Data} />
+            <InfoCard {...serverData.infoCard1} />
             
-            <Faq {...faqData} />
+            <Faq {...serverData.faq} />
             
-            <Blogs {...blogsData} />
+            <Blogs {...serverData.blogs} />
             
-            <InfoCard {...infoCard2Data} />
+            <InfoCard {...serverData.infoCard2} />
             
         </>
     );
 };
 export default Home;
+
+
+export function getServerData() {
+    console.log("Server side rendering of Home using templating and script")
+    return {
+        props: {
+            
+            hero1,
+            
+            insights,
+            
+            hero2,
+            
+            research,
+            
+            infoCard1,
+            
+            faq,
+            
+            blogs,
+            
+            infoCard2,
+            
+            SeoData,
+        }
+    }
+}

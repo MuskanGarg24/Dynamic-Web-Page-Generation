@@ -24,7 +24,7 @@ const SeoData: SEO = {
 }
 
 
-const overview1Data: Data = {
+const overview1: Data = {
     
     
     title: "Mission and Vision",
@@ -58,7 +58,7 @@ const overview1Data: Data = {
     }
 };
 
-const overview2Data: Data = {
+const overview2: Data = {
     
     
     title: "About Us",
@@ -93,17 +93,45 @@ const overview2Data: Data = {
 };
 
 
+interface ServerDataProps {
+    serverData: {
+        
+        overview1: Data;
+        
+        overview2: Data;
+        
+        SeoData: SEO;
+    }
+}
 
-const About: React.FC = () => {
+const About: React.FC<ServerDataProps> = ({serverData}) => {
+
+    console.log("page props are", serverData);
+
     return (
         <>
-        <GatsbySeo {...SeoData} />
+        <GatsbySeo {...serverData.SeoData} />
             
-            <Overview {...overview1Data} />
+            <Overview {...serverData.overview1} />
             
-            <Overview {...overview2Data} />
+            <Overview {...serverData.overview2} />
             
         </>
     );
 };
 export default About;
+
+
+export function getServerData() {
+    console.log("Server side rendering of About using templating and script")
+    return {
+        props: {
+            
+            overview1,
+            
+            overview2,
+            
+            SeoData,
+        }
+    }
+}

@@ -24,7 +24,7 @@ const SeoData: SEO = {
 }
 
 {% for component in components %}
-const {{ component.dataVariableName}}Data: Data = {
+const {{ component.dataVariableName}}: Data = {
     {% for propKey, propValue in component.props %}
     {% if propKey != 'data' and propKey != 'apiEndPoints' %}
     {{ propKey }}: "{{ propValue }}",
@@ -51,15 +51,39 @@ const {{ component.dataVariableName}}Data: Data = {
 };
 {% endfor %}
 
+interface ServerDataProps {
+    serverData: {
+        {% for component in components %}
+        {{component.dataVariableName}}: Data;
+        {% endfor %}
+        SeoData: SEO;
+    }
+}
 
-const {{ pageName }}: React.FC = () => {
+const {{ pageName }}: React.FC<ServerDataProps> = ({serverData}) => {
+
+    console.log("page props are", serverData);
+
     return (
         <>
-        <GatsbySeo {...SeoData} />
+        <GatsbySeo {...serverData.SeoData} />
             {% for component in components %}
-            <{{ component.componentName }} {...{{ component.dataVariableName }}Data} />
+            <{{ component.componentName }} {...serverData.{{ component.dataVariableName }}} />
             {% endfor %}
         </>
     );
 };
 export default {{ pageName }};
+
+
+export function getServerData() {
+    console.log("Server side rendering of {{pageName}} using templating and script")
+    return {
+        props: {
+            {% for component in components %}
+            {{component.dataVariableName}},
+            {% endfor %}
+            SeoData,
+        }
+    }
+}

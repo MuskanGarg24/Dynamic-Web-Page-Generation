@@ -23,13 +23,33 @@ const SeoData: SEO = {
 
 
 
+interface ServerDataProps {
+    serverData: {
+        
+        SeoData: SEO;
+    }
+}
 
-const Company: React.FC = () => {
+const Company: React.FC<ServerDataProps> = ({serverData}) => {
+
+    console.log("page props are", serverData);
+
     return (
         <>
-        <GatsbySeo {...SeoData} />
+        <GatsbySeo {...serverData.SeoData} />
             
         </>
     );
 };
 export default Company;
+
+
+export function getServerData() {
+    console.log("Server side rendering of Company using templating and script")
+    return {
+        props: {
+            
+            SeoData,
+        }
+    }
+}
