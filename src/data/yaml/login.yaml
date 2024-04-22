@@ -1,0 +1,11 @@
+- componentName: LogIn
+  dataVariableName: login
+  props:
+    title: "Login to your account"
+    highlightedTitle: ""
+    description: ""
+    buttonLabel: "Login"
+    data: []
+    apiEndPoints: {
+      "login": "http://localhost:3000/login"
+    }

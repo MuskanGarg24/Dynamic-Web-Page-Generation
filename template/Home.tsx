@@ -14,6 +14,8 @@ import Blogs from "../src/components/Blogs";
 
 import { GatsbySeo } from 'gatsby-plugin-next-seo';
 
+
+
 interface Data {
     title: string;
     highlightedTitle: string;
@@ -362,11 +364,12 @@ interface ServerDataProps {
 
 const Home: React.FC<ServerDataProps> = ({serverData}) => {
 
-    console.log("page props are", serverData);
+    
 
     return (
         <>
         <GatsbySeo {...serverData.SeoData} />
+        
             
             <Hero {...serverData.hero1} />
             
@@ -384,6 +387,7 @@ const Home: React.FC<ServerDataProps> = ({serverData}) => {
             
             <InfoCard {...serverData.infoCard2} />
             
+        
         </>
     );
 };
@@ -392,26 +396,55 @@ export default Home;
 
 export async function getServerData() {
     console.log("Server side rendering of Home using templating and script")
-    return {
-        props: {
-            
-            hero1,
-            
-            insights,
-            
-            hero2,
-            
-            research,
-            
-            infoCard1,
-            
-            faq,
-            
-            blogs,
-            
-            infoCard2,
-            
-            SeoData,
+    try {
+        
+        const res = await fetch(blogs.apiEndPoints.GET_URL);
+        const fetchedData = await res.json();
+        const updatedBlogsData = [...blogs.data, ...fetchedData.blogs];
+        return {
+            props: {
+                
+                
+                hero1,
+                
+                
+                
+                insights,
+                
+                
+                
+                hero2,
+                
+                
+                
+                research,
+                
+                
+                
+                infoCard1,
+                
+                
+                
+                faq,
+                
+                
+                
+                blogs: {
+                    ...blogs,
+                    data: updatedBlogsData
+                },
+                
+                
+                
+                infoCard2,
+                
+                
+                SeoData,
+            }
         }
+        
+    }
+    catch (error) {
+        console.log("Error while fetching data for Home page", error);
     }
 }

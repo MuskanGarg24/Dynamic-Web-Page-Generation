@@ -28,7 +28,7 @@ if (!fs.existsSync(outputDir)) {
 const pageTemplate = fs.readFileSync("nunjucks/page.tsx.njk", "utf8");
 pagesData.forEach((page) => {
   const importedComponents = new Set();
-  const { ymlPath, pageName, seo } = page;
+  const { ymlPath, pageName, seo, isProtected } = page;
   const components = yaml.load(fs.readFileSync(ymlPath, "utf8"));
   components?.forEach((component) => {
     importedComponents.add(component.componentName);
@@ -38,6 +38,7 @@ pagesData.forEach((page) => {
     seo,
     components,
     importedComponents: Array.from(importedComponents),
+    isProtected,
   });
   const outputFile = path.join(outputDir, `${pageName}.tsx`);
   fs.writeFileSync(outputFile, renderedTemplate);

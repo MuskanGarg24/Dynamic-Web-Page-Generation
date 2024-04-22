@@ -2,6 +2,8 @@ import React from "react";
 
 import { GatsbySeo } from 'gatsby-plugin-next-seo';
 
+
+
 interface Data {
     title: string;
     highlightedTitle: string;
@@ -32,12 +34,14 @@ interface ServerDataProps {
 
 const Company: React.FC<ServerDataProps> = ({serverData}) => {
 
-    console.log("page props are", serverData);
+    
 
     return (
         <>
         <GatsbySeo {...serverData.SeoData} />
+        
             
+        
         </>
     );
 };
@@ -46,10 +50,17 @@ export default Company;
 
 export async function getServerData() {
     console.log("Server side rendering of Company using templating and script")
-    return {
-        props: {
-            
-            SeoData,
-        }
+    try {
+        
+            return {
+                props: {
+                    
+                    SeoData,
+                }
+            };
+        
+    }
+    catch (error) {
+        console.log("Error while fetching data for Company page", error);
     }
 }

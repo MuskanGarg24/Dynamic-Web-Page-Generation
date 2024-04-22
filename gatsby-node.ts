@@ -23,4 +23,9 @@ exports.createPages = async ({ actions }: any) => {
             component: path.resolve("template/Products.tsx"),
         });
     
+        createPage({
+            path: "/login",
+            component: path.resolve("template/Login.tsx"),
+        });
+    
 };

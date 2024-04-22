@@ -9,7 +9,7 @@ interface LayoutProps {
 
 const navItems = {
   
-  navItems: [{"to":"/","text":"Home"},{"to":"/products","text":"Products"},{"to":"/company","text":"Company"},{"to":"/about","text":"About Us"}],
+  navItems: [{"to":"/","text":"Home"},{"to":"/products","text":"Products"},{"to":"/company","text":"Company"},{"to":"/about","text":"About Us"},{"to":"/login","text":"Login"}],
   
 };
 

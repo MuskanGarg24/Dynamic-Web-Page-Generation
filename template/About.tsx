@@ -4,6 +4,10 @@ import Overview from "../src/components/Overview";
 
 import { GatsbySeo } from 'gatsby-plugin-next-seo';
 
+import axios from "axios"
+
+
+
 interface Data {
     title: string;
     highlightedTitle: string;
@@ -40,8 +44,6 @@ const overview1: Data = {
     
     
     buttonLabel: "",
-    
-    
     
     
     
@@ -106,16 +108,45 @@ interface ServerDataProps {
 
 const About: React.FC<ServerDataProps> = ({serverData}) => {
 
-    console.log("page props are", serverData);
+    
+    const [loggedIn, setLoggedIn] = React.useState(false);
+
+    React.useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            axios.get("http://localhost:3000/verify", {
+                headers: {
+                    Authorization: token
+                }
+            })
+                .then((response) => {
+                    console.log(response);
+                    setLoggedIn(true);
+                })
+                .catch((error) => {
+                    console.log(error);
+                    window.location.href = "/login";
+                });
+        } else {
+            window.location.href = "/login";
+        }
+    }, []);
+    
 
     return (
         <>
         <GatsbySeo {...serverData.SeoData} />
-            
-            <Overview {...serverData.overview1} />
-            
-            <Overview {...serverData.overview2} />
-            
+        
+        {loggedIn ? (
+            <>
+                
+                <Overview {...serverData.overview1} />
+                
+                <Overview {...serverData.overview2} />
+                
+            </>
+        ) : null}
+        
         </>
     );
 };
@@ -124,14 +155,21 @@ export default About;
 
 export async function getServerData() {
     console.log("Server side rendering of About using templating and script")
-    return {
-        props: {
-            
-            overview1,
-            
-            overview2,
-            
-            SeoData,
-        }
+    try {
+        
+            return {
+                props: {
+                    
+                    overview1,
+                    
+                    overview2,
+                    
+                    SeoData,
+                }
+            };
+        
+    }
+    catch (error) {
+        console.log("Error while fetching data for About page", error);
     }
 }

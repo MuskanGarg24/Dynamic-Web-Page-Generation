@@ -3,6 +3,10 @@ import React from "react";
 import {{ component }} from "../src/components/{{ component }}";
 {% endfor %}
 import { GatsbySeo } from 'gatsby-plugin-next-seo';
+{% if isProtected %}
+import axios from "axios"
+{% endif %}
+
 
 interface Data {
     title: string;
@@ -62,14 +66,47 @@ interface ServerDataProps {
 
 const {{ pageName }}: React.FC<ServerDataProps> = ({serverData}) => {
 
-    console.log("page props are", serverData);
+    {% if isProtected %}
+    const [loggedIn, setLoggedIn] = React.useState(false);
+
+    React.useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            axios.get("{{ isProtected.verifyToken }}", {
+                headers: {
+                    Authorization: token
+                }
+            })
+                .then((response) => {
+                    console.log(response);
+                    setLoggedIn(true);
+                })
+                .catch((error) => {
+                    console.log(error);
+                    window.location.href = "{{ isProtected.redirectRoute }}";
+                });
+        } else {
+            window.location.href = "{{ isProtected.redirectRoute }}";
+        }
+    }, []);
+    {% endif %}
 
     return (
         <>
         <GatsbySeo {...serverData.SeoData} />
+        {% if isProtected %}
+        {loggedIn ? (
+            <>
+                {% for component in components %}
+                <{{ component.componentName }} {...serverData.{{ component.dataVariableName }}} />
+                {% endfor %}
+            </>
+        ) : null}
+        {% else %}
             {% for component in components %}
             <{{ component.componentName }} {...serverData.{{ component.dataVariableName }}} />
             {% endfor %}
+        {% endif %}
         </>
     );
 };
@@ -78,12 +115,38 @@ export default {{ pageName }};
 
 export async function getServerData() {
     console.log("Server side rendering of {{pageName}} using templating and script")
-    return {
-        props: {
-            {% for component in components %}
-            {{component.dataVariableName}},
-            {% endfor %}
-            SeoData,
+    try {
+        {% if pageName == "Home" %}
+        const res = await fetch(blogs.apiEndPoints.GET_URL);
+        const fetchedData = await res.json();
+        const updatedBlogsData = [...blogs.data, ...fetchedData.blogs];
+        return {
+            props: {
+                {% for component in components %}
+                {% if component.dataVariableName === "blogs" %}
+                blogs: {
+                    ...blogs,
+                    data: updatedBlogsData
+                },
+                {% else %}
+                {{component.dataVariableName}},
+                {% endif %}
+                {% endfor %}
+                SeoData,
+            }
         }
+        {% else %}
+            return {
+                props: {
+                    {% for component in components %}
+                    {{component.dataVariableName}},
+                    {% endfor %}
+                    SeoData,
+                }
+            };
+        {% endif %}
+    }
+    catch (error) {
+        console.log("Error while fetching data for {{pageName}} page", error);
     }
 }

@@ -11,6 +11,9 @@
   seo:
     title: "About page title"
     description: "About page description"
+  isProtected:
+    redirectRoute: "/login"
+    verifyToken: "http://localhost:3000/verify"
 
 - ymlPath: "./src/data/yaml/company.yaml"
   pageName: "Company"
@@ -25,3 +28,10 @@
   seo:
     title: "Products page title"
     description: "Products page description"
+
+- ymlPath: "./src/data/yaml/login.yaml"
+  pageName: "Login"
+  route: "/login"
+  seo:
+    title: "Login page title"
+    description: "Login page description"

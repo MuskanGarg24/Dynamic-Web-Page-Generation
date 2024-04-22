@@ -13,6 +13,7 @@ interface ServerDataProps {
     serverData: {
         homePageData: HomePageData;
         homePageSEO: SEO;
+        data: [];
     }
 }
 
@@ -60,12 +61,26 @@ const Home: React.FC<ServerDataProps> = ({ serverData }) => {
 export default Home;
 
 
-export function getServerData() {
+export async function getServerData() {
     console.log("Server side rendering of home page");
-    return {
-        props: {
-            homePageData,
-            homePageSEO,
+    try {
+        const res = await fetch(homePageData.blogs.apiEndPoints.GET_URL);
+        const fetchedData = await res.json();
+        const updatedBlogsData = [...homePageData.blogs.data, ...fetchedData.blogs];
+        const udpatedHomePageData = {
+            ...homePageData,
+            blogs: {
+                ...homePageData.blogs,
+                data: updatedBlogsData
+            }
         }
+        return {
+            props: {
+                homePageData: udpatedHomePageData,
+                homePageSEO,
+            }
+        }
+    } catch (error) {
+        console.log("error fetching data", error);
     }
 }

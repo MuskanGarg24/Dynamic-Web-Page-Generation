@@ -16,7 +16,7 @@ const Navbar: React.FC<NavProps> = ({ navItems }) => {
                     <StaticImage src='../images/logo.png' alt='logo' className="w-48" />
                 </div>
                 <ul className='flex space-x-9 text-[#6b7583] text-md font-semibold mt-6 cursor-pointer'>
-                    {navItems.map((item, index) => (
+                    {navItems.slice(0, navItems.length - 1).map((item, index) => (
                         <li key={index}>
                             <Link to={item.to}>{item.text}</Link>
                         </li>
@@ -24,7 +24,9 @@ const Navbar: React.FC<NavProps> = ({ navItems }) => {
                 </ul>
             </div>
             <div className="mt-3">
-                <Button label="Log in" />
+                <Link to={navItems[navItems.length - 1].to}>
+                    <Button label={navItems[navItems.length - 1].text} />
+                </Link>
             </div>
         </div>
     )
