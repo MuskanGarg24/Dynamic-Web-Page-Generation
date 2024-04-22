@@ -44,7 +44,7 @@ const Company: React.FC<ServerDataProps> = ({serverData}) => {
 export default Company;
 
 
-export function getServerData() {
+export async function getServerData() {
     console.log("Server side rendering of Company using templating and script")
     return {
         props: {

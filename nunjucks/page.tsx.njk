@@ -76,7 +76,7 @@ const {{ pageName }}: React.FC<ServerDataProps> = ({serverData}) => {
 export default {{ pageName }};
 
 
-export function getServerData() {
+export async function getServerData() {
     console.log("Server side rendering of {{pageName}} using templating and script")
     return {
         props: {

@@ -390,7 +390,7 @@ const Home: React.FC<ServerDataProps> = ({serverData}) => {
 export default Home;
 
 
-export function getServerData() {
+export async function getServerData() {
     console.log("Server side rendering of Home using templating and script")
     return {
         props: {

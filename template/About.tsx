@@ -122,7 +122,7 @@ const About: React.FC<ServerDataProps> = ({serverData}) => {
 export default About;
 
 
-export function getServerData() {
+export async function getServerData() {
     console.log("Server side rendering of About using templating and script")
     return {
         props: {

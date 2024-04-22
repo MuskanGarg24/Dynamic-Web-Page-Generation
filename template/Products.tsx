@@ -44,7 +44,7 @@ const Products: React.FC<ServerDataProps> = ({serverData}) => {
 export default Products;
 
 
-export function getServerData() {
+export async function getServerData() {
     console.log("Server side rendering of Products using templating and script")
     return {
         props: {
