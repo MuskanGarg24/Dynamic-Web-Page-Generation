@@ -1,8 +1,5 @@
 import React from "react";
-
 import { GatsbySeo } from 'gatsby-plugin-next-seo';
-
-
 
 interface Data {
     title: string;
@@ -11,6 +8,7 @@ interface Data {
     buttonLabel: string;
     data: any[];
     apiEndPoints: any;
+    isSSR: string;
 }
 
 interface SEO {
@@ -23,42 +21,30 @@ const SeoData: SEO = {
     description: "Products page description"
 }
 
-
-
 interface ServerDataProps {
     serverData: {
-        
         SeoData: SEO;
     }
 }
 
-const Products: React.FC<ServerDataProps> = ({serverData}) => {
-
-    
-
+const Products: React.FC<ServerDataProps> = ({ serverData }) => {
     return (
         <>
-        <GatsbySeo {...serverData.SeoData} />
-        
-            
-        
+            <GatsbySeo {...serverData.SeoData} />
         </>
     );
 };
 export default Products;
 
-
 export async function getServerData() {
     console.log("Server side rendering of Products using templating and script")
     try {
-        
-            return {
-                props: {
-                    
-                    SeoData,
-                }
-            };
-        
+        return {
+            props: {
+                SeoData,
+            }
+        };
+
     }
     catch (error) {
         console.log("Error while fetching data for Products page", error);

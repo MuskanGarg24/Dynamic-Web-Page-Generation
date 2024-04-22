@@ -13,6 +13,7 @@ interface Data {
     buttonLabel: string;
     data: any[];
     apiEndPoints: any;
+    isSSR: string;
 }
 
 interface SEO {
@@ -81,7 +82,9 @@ const Login: React.FC<ServerDataProps> = ({serverData}) => {
         <GatsbySeo {...serverData.SeoData} />
         
             
-            <LogIn {...serverData.login} />
+                
+                    <LogIn {...login} />
+                
             
         
         </>
@@ -97,7 +100,7 @@ export async function getServerData() {
             return {
                 props: {
                     
-                    login,
+                    
                     
                     SeoData,
                 }

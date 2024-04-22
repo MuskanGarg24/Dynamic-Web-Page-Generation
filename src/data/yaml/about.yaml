@@ -7,6 +7,8 @@
     Our vision is a future where the Indian real estate industry operates seamlessly, driven by cutting-edge technology that reshapes processes and decision-making. We aspire to lead this transformation by exceeding the evolving needs of the industry, creating an ecosystem where every participant can thrive."
     buttonLabel: ""
     data: []
+    apiEndPoints: {}
+    isSSR: false
   
 - componentName: "Overview"
   dataVariableName: "overview2"
@@ -17,3 +19,4 @@
     buttonLabel: ""
     data: []
     apiEndPoints: {}
+    isSSR: true

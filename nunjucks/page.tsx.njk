@@ -7,7 +7,6 @@ import { GatsbySeo } from 'gatsby-plugin-next-seo';
 import axios from "axios"
 {% endif %}
 
-
 interface Data {
     title: string;
     highlightedTitle: string;
@@ -15,6 +14,7 @@ interface Data {
     buttonLabel: string;
     data: any[];
     apiEndPoints: any;
+    isSSR: string;
 }
 
 interface SEO {
@@ -98,13 +98,21 @@ const {{ pageName }}: React.FC<ServerDataProps> = ({serverData}) => {
         {loggedIn ? (
             <>
                 {% for component in components %}
-                <{{ component.componentName }} {...serverData.{{ component.dataVariableName }}} />
+                    {% if component.props.isSSR %}
+                        <{{ component.componentName }} {...serverData.{{component.dataVariableName}}} />
+                    {% else %}
+                        <{{ component.componentName }} {...{{ component.dataVariableName }}} />
+                    {% endif %}
                 {% endfor %}
             </>
         ) : null}
         {% else %}
             {% for component in components %}
-            <{{ component.componentName }} {...serverData.{{ component.dataVariableName }}} />
+                {% if component.props.isSSR %}
+                    <{{ component.componentName }} {...serverData.{{component.dataVariableName}}} />
+                {% else %}
+                    <{{ component.componentName }} {...{{ component.dataVariableName }}} />
+                {% endif %}
             {% endfor %}
         {% endif %}
         </>
@@ -119,18 +127,18 @@ export async function getServerData() {
         {% if pageName == "Home" %}
         const res = await fetch(blogs.apiEndPoints.GET_URL);
         const fetchedData = await res.json();
-        const updatedBlogsData = [...blogs.data, ...fetchedData.blogs];
+        const blogsData = {
+            ...blogs,
+            data: [...blogs.data, ...fetchedData.blogs]
+        }
         return {
             props: {
                 {% for component in components %}
-                {% if component.dataVariableName === "blogs" %}
-                blogs: {
-                    ...blogs,
-                    data: updatedBlogsData
-                },
-                {% else %}
-                {{component.dataVariableName}},
-                {% endif %}
+                    {% if component.componentName === "Blogs" %}
+                        blogs: blogsData,
+                    {% elseif component.props.isSSR %}
+                        {{component.dataVariableName}},
+                    {% endif %}
                 {% endfor %}
                 SeoData,
             }
@@ -139,7 +147,9 @@ export async function getServerData() {
             return {
                 props: {
                     {% for component in components %}
+                    {% if component.props.isSSR %}
                     {{component.dataVariableName}},
+                    {% endif %}
                     {% endfor %}
                     SeoData,
                 }
