@@ -8,8 +8,8 @@
     buttonLabel: ""
     data: []
     apiEndPoints: {}
-    isSSR: false
-    isProtected: false
+  isSSR: false
+  isProtected: false
   
 - componentName: "Overview"
   dataVariableName: "overview2"
@@ -20,5 +20,5 @@
     buttonLabel: ""
     data: []
     apiEndPoints: {}
-    isSSR: true
-    isProtected: false
+  isSSR: true
+  isProtected: false

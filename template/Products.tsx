@@ -1,4 +1,5 @@
 import React from "react";
+
 import { GatsbySeo } from 'gatsby-plugin-next-seo';
 import useAuthentication from "../src/components/useAuthentication";
 
@@ -9,8 +10,6 @@ interface Data {
     buttonLabel: string;
     data: any[];
     apiEndPoints: any;
-    isSSR: string;
-    isProtected: string;
 }
 
 interface SEO {
@@ -23,30 +22,46 @@ const SeoData: SEO = {
     description: "Products page description"
 }
 
+
+
 interface ServerDataProps {
     serverData: {
+        
         SeoData: SEO;
     }
 }
 
-const Products: React.FC<ServerDataProps> = ({ serverData }) => {
-    const loggedIn = useAuthentication();
+const Products: React.FC<ServerDataProps> = ({serverData}) => {
+
+    console.log(serverData)
+
+    
+        const loggedIn = useAuthentication();
+    
+
     return (
         <>
-            <GatsbySeo {...serverData.SeoData} />
+        <GatsbySeo {...serverData.SeoData} />
+        
+            
+        
         </>
     );
 };
 export default Products;
 
+
 export async function getServerData() {
     console.log("Server side rendering of Products using templating and script")
     try {
-        return {
-            props: {
-                SeoData,
-            }
-        };
+        
+            return {
+                props: {
+                    
+                    SeoData,
+                }
+            };
+        
     }
     catch (error) {
         console.log("Error while fetching data for Products page", error);

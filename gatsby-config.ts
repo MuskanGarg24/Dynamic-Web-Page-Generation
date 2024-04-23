@@ -5,6 +5,9 @@ const siteTitle = siteMeta.siteMetadata.title;
 const siteUrl = siteMeta.siteMetadata.siteUrl;
 
 const config: GatsbyConfig = {
+  flags: {
+    DEV_SSR: true,
+  },
   siteMetadata: {
     title: siteTitle,
     siteUrl: siteUrl,

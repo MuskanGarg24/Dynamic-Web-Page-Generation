@@ -5,8 +5,9 @@ const useAuthentication = () => {
   const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
+    const isBrowser = typeof window !== `undefined`;
+    const token = window.localStorage.getItem('token');
+    if (isBrowser && token) {
       axios.get("http://localhost:3000/verify", {
         headers: {
           Authorization: token

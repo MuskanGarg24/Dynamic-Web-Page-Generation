@@ -12,8 +12,6 @@ interface Data {
     buttonLabel: string;
     data: any[];
     apiEndPoints: any;
-    isSSR: string;
-    isProtected: string;
 }
 
 interface SEO {
@@ -67,6 +65,8 @@ interface ServerDataProps {
 
 const {{ pageName }}: React.FC<ServerDataProps> = ({serverData}) => {
 
+    console.log(serverData)
+
     {% if pageName !== "Login" %}
         const loggedIn = useAuthentication();
     {% endif %}
@@ -78,7 +78,7 @@ const {{ pageName }}: React.FC<ServerDataProps> = ({serverData}) => {
         {loggedIn ? (
             <>
                 {% for component in components %}
-                    {% if component.props.isSSR %}
+                    {% if component.isSSR %}
                         <{{ component.componentName }} {...serverData.{{component.dataVariableName}}} />
                     {% else %}
                         <{{ component.componentName }} {...{{ component.dataVariableName }}} />
@@ -88,10 +88,10 @@ const {{ pageName }}: React.FC<ServerDataProps> = ({serverData}) => {
         ) : (<p>You need to be logged in to view this page</p>)}
         {% else %}
             {% for component in components %}
-                {% if component.props.isProtected %}
-                    {Boolean({{component.dataVariableName}}.isProtected) && loggedIn ? 
+                {% if component.isProtected %}
+                    {loggedIn ? 
                     ( 
-                        {% if component.props.isSSR %}
+                        {% if component.isSSR %}
                             <{{ component.componentName }} {...serverData.{{component.dataVariableName}}} />
                         {% else %}
                             <{{ component.componentName }} {...{{ component.dataVariableName }}} />
@@ -101,7 +101,7 @@ const {{ pageName }}: React.FC<ServerDataProps> = ({serverData}) => {
                         <p className="text-center text-xl my-20"> You need to be logged in to view this section </p>
                     )}
                 {% else %}
-                    {% if component.props.isSSR %}
+                    {% if component.isSSR %}
                         <{{ component.componentName }} {...serverData.{{component.dataVariableName}}} />
                     {% else %}
                         <{{ component.componentName }} {...{{ component.dataVariableName }}} />
@@ -130,7 +130,7 @@ export async function getServerData() {
                 {% for component in components %}
                     {% if component.componentName === "Blogs" %}
                         blogs: blogsData,
-                    {% elseif component.props.isSSR %}
+                    {% elseif component.isSSR %}
                         {{component.dataVariableName}},
                     {% endif %}
                 {% endfor %}
@@ -141,7 +141,7 @@ export async function getServerData() {
             return {
                 props: {
                     {% for component in components %}
-                    {% if component.props.isSSR %}
+                    {% if component.isSSR %}
                     {{component.dataVariableName}},
                     {% endif %}
                     {% endfor %}
